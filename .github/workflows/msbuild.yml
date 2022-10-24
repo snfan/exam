@@ -28,5 +28,5 @@ jobs:
       run: cmake --version
     - name: Use curl
       run: curl --version
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Use Cmd
+      run: call Build.cmd
