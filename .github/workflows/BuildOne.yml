@@ -12,5 +12,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    #- uses: actions/checkout@v3
+    - name: Install 7Zip PowerShell Module
+        shell: powershell
+        run: Install-Module 7Zip4PowerShell -Force -Verbose
+      - uses: actions/checkout@v2
    
