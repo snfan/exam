@@ -7,6 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
+  BUILD_NAME: v1.0.1
   SOLUTION_FILE_PATH: One/One.sln
   BUILD_CONFIGURATION: Release
 
@@ -25,7 +26,9 @@ jobs:
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      run: |
+        msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}} /p:Platform=x86
+        msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}} /p:Platform=x64
   
     - name: Create Release
       id: create_release
@@ -33,9 +36,18 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
       with:
-        tag_name: ${{github.ref}}
-        release_name: ${{github.ref}}
+        tag_name: ${{env.BUILD_NAME}}
+        release_name: ${{env.BUILD_NAME}}
         
+    - name: Upload Release (x86)
+      uses: actions/upload-release-asset@latest
+      env:
+        GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
+      with:
+        upload_url: ${{steps.create_release.outputs.upload_url}}
+        asset_path: One\Release\One.exe
+        asset_name: One_x86.exe
+        asset_content_type: application/octet-stream 
     - name: Upload Release (x64)
       uses: actions/upload-release-asset@latest
       env:
