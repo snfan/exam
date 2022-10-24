@@ -28,12 +28,13 @@ jobs:
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
   
     - name: Create Release
+      id: create_release
       uses: actions/create-release@latest
       env:
         GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
       with:
-        tag_name: v1.0.2
-        release_name: v1.0.2
+        tag_name: ${{github.ref}}
+        release_name: ${{github.ref}}
         
     - name: Upload Release (x64)
       uses: actions/upload-release-asset@latest
