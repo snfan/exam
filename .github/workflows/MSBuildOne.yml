@@ -18,10 +18,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@latest
+    - uses: actions/checkout@v3
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@latest
+      uses: microsoft/setup-msbuild@v1.1.3
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
