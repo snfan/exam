@@ -21,7 +21,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
         with:
+          tag_name: ${{env.BUILD_NAME}}
           release_name: ${{env.BUILD_NAME}}
+      - name: Show
+        run: |
+          echo ${{steps.create_release.outputs.upload_url}}
       - name: Upload Release (x64)
         uses: actions/upload-release-asset@latest
         env:
