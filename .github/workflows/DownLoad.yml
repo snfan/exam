@@ -28,7 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
         with:
-         # upload_url: ${{steps.create_release.outputs.upload_url}}
+          upload_url: ${{steps.create_release.outputs.upload_url}}
           asset_path: strawberry-perl-5.32.1.1-64bit.msi
           asset_name: strawberry-perl-5.32.1.1-64bit.msi
           asset_content_type: application/octet-stream 
