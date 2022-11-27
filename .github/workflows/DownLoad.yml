@@ -14,24 +14,14 @@ jobs:
     steps:
       - name: Build
         run: |
-          wget https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.msi
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
-        with:
-          tag_name: ${{env.BUILD_NAME}}
-          release_name: ${{env.BUILD_NAME}}
-      - name: Show
-        run: |
-          echo ${{steps.create_release.outputs.upload_url}}
+          wget https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-32bit.msi
+      
       - name: Upload Release (x64)
         uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
         with:
-          upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: strawberry-perl-5.32.1.1-64bit.msi
-          asset_name: strawberry-perl-5.32.1.1-64bit.msi
+          upload_url: https://uploads.github.com/repos/snfan/exam/releases/84256454/assets{?name,label}
+          asset_path: strawberry-perl-5.32.1.1-32bit.msi
+          asset_name: strawberry-perl-5.32.1.1-32bit.msi
           asset_content_type: application/octet-stream 
