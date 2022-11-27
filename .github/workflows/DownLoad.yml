@@ -1,21 +1,22 @@
-name: Python application
-
-on: [push]
-
+name: DownLoad
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+env:
+  BUILD_NAME: v1.0.3
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout actions
-    - uses: actions/checkout@v1
-        
-    - name: Update paper list
-      run: |
-        wget https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.msi
-        
-    - name: commit
+      - name: Build
+        run: |
+          wget https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.msi
+      
+	    - name: commit
       run: |
         git config --global user.email 625726371@qq.com
         git config --global user.name mitags
