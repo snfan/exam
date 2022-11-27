@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ "main" ]
 env:
-  BUILD_NAME: v1.0.3
+  BUILD_NAME: v1.0.1
 jobs:
   build:
 
@@ -15,15 +15,19 @@ jobs:
       - name: Build
         run: |
           wget https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.msi
-      
-	    - name: commit
-      run: |
-        git config --global user.email 625726371@qq.com
-        git config --global user.name mitags
-        git add .
-        git commit -m "update" -a
-        
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{secrets.GITHUB_TOKEN}}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
+        with:
+          release_name: ${{env.BUILD_NAME}}
+      - name: Upload Release (x64)
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
+        with:
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: strawberry-perl-5.32.1.1-64bit.msi
+          asset_name: strawberry-perl-5.32.1.1-64bit.msi
+          asset_content_type: application/octet-stream 
