@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Build
         run: |
-          wget https://chrome-infra-packages.appspot.com/dl/gn/gn/windows-amd64/+/latest
+          wget https://chrome-infra-packages.appspot.com/dl/gn/gn/windows-amd64/+/latest -O gn-windows-amd64.zip
       
       - name: Upload Release (x64)
         uses: actions/upload-release-asset@latest
@@ -22,6 +22,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
         with:
           upload_url: https://uploads.github.com/repos/snfan/exam/releases/84256454/assets{?name,label}
-          asset_path: strawberry-perl-5.32.1.1-32bit.msi
-          asset_name: strawberry-perl-5.32.1.1-32bit.msi
+          asset_path: gn-windows-amd64.zip
+          asset_name: gn-windows-amd64.zip
           asset_content_type: application/octet-stream 
