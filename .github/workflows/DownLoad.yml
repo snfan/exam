@@ -15,7 +15,7 @@ jobs:
       - name: Build
         run: |
           #wget https://chrome-infra-packages.appspot.com/dl/gn/gn/windows-amd64/+/latest -O gn-windows-amd64.zip
-          wget "https://chrome-infra-packages.appspot.com/client?platform=windows-amd64&version=git_revision:89ada246fcbf10f330011e4991d017332af2365b"
+          wget "https://chrome-infra-packages.appspot.com/client?platform=windows-amd64&version=git_revision:89ada246fcbf10f330011e4991d017332af2365b" -O cipd.exe
       
       - name: Upload Release (x64)
         uses: actions/upload-release-asset@latest
@@ -23,6 +23,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.BUILD_TOKEN}}
         with:
           upload_url: https://uploads.github.com/repos/snfan/exam/releases/84256454/assets{?name,label}
-          asset_path: gn-windows-amd64.zip
-          asset_name: gn-windows-amd64.zip
+          asset_path: cipd.exe
+          asset_name: cipd.exe
           asset_content_type: application/octet-stream 
