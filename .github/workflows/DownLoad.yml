@@ -15,7 +15,7 @@ jobs:
       - name: Build
         run: |
           wget https://chrome-infra-packages.appspot.com/dl/gn/gn/windows-amd64/+/latest -O gn-windows-amd64.zip
-          wget https://chrome-infra-packages.appspot.com/client?platform=windows-amd64&version=git_revision%3A89ada246fcbf10f330011e4991d017332af2365b
+          wget https://chrome-infra-packages.appspot.com/client?platform=windows-amd64%26version=git_revision%3A89ada246fcbf10f330011e4991d017332af2365b
       
       - name: Upload Release (x64)
         uses: actions/upload-release-asset@latest
